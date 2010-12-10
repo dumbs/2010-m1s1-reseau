@@ -166,8 +166,8 @@ public class Client implements ClientIntf {
 	
 	public String toStringComptesClients(){
 		String s = "";
-		for(int i = 0; i < comptesClient.size(); i++){
-				s += comptesClient.get(i).toString();
+		for(ICompte c : comptesClient){
+				s += c.toString();
 		}
 		return s;
 	}		

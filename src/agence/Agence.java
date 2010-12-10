@@ -57,26 +57,19 @@ public class Agence implements AgenceIntf {
 	 * @throws RemoteException 
 	 */
 	// ?? Et l'adresse du client ? Pourquoi l'adresse de la banque ??
-	public int creeClient(String nomClient, Sexe sexe, Adresse adrClient, Agence agence) throws RemoteException{
+	public int creeClient(String nomClient, Sexe sexe, Adresse adrClient, AgenceIntf agence) throws RemoteException{
+		System.out.println("Agence.creeClient()");
 		Client client = new Client(nomClient, sexe, adrClient, this);
 		this.clients.add(client);
 		return client.getNumClient();
 	}
 	
 	public int creeClient(String nomClient, Sexe sexe, String rue, String ville,
-			String numTel, Agence agence) throws RemoteException{
+			String numTel, AgenceIntf agence) throws RemoteException{
 		Client client = new Client(nomClient, sexe, rue, ville, numTel, this);
 		this.clients.add(client);
 		return client.getNumClient();
 	}
-	
-/*
-		public int creeClient(String nomClient, char sexe, String rue, String ville,
-			String numTel, String adrAgence){
-		Client client = new Client(nomClient, sexe, rue, ville, numTel, adrAgence);
-		return client.getNumClient();
-	} // ?? adrAgence ???
- */
 	
 	/** 
 	 * Détruit un client à l'aide de son numéro de client passé en paramètre
@@ -127,21 +120,22 @@ public class Agence implements AgenceIntf {
 		return ((Banque) this.banque).getNomBanque();
 	}
 	
-	public String toStringClients(){
+	public String toStringClients() {
 		String s = "";
-		for(int i = 0; i < clients.size(); i++){
-				s += clients.get(i).toString();
-		}		
+		for(ClientIntf c : clients){
+			s += c.toString();
+		}
 		return s;
 	}
 	
-	public String toString(){
+	@Override
+	public String toString() {
 		return "\n\nNuméro agence : " + this.numAgence
 			+ " -> adresse : " + this.getAdrAgence()
 			+ "\n" + toStringClients();
 	}
 	
-	public void displayToString(){
+	public void displayToString() throws RemoteException {
 		System.out.println(this.toString());
 	}
 }

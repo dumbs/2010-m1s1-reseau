@@ -5,7 +5,6 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import agence.Agence;
 import agence.AgenceIntf;
 
@@ -40,7 +39,7 @@ public class Banque extends UnicastRemoteObject implements BanqueIntf {
 	 * @param adrAgence
 	 * @param agence
 	 */
-	public boolean insereAgence(String adrAgence, Agence agence){
+	public boolean insereAgence(String adrAgence, AgenceIntf agence) {
 		if(this.rechercheAgence(adrAgence) == null){
 			this.agences.add(agence);
 			return true;
@@ -66,8 +65,8 @@ public class Banque extends UnicastRemoteObject implements BanqueIntf {
 	 * @return
 	 */
 	public AgenceIntf rechercheAgence(String adrAgence){
-		for(int i = 0; i < agences.size(); i++){
-			if(((Agence) agences.get(i)).getAdrAgence() == adrAgence){
+		for(int i = 0; i < agences.size(); i++) {
+			if(((Agence) agences.get(i)).getAdrAgence().equals(adrAgence)) {
 				return agences.get(i);
 			}
 		}
@@ -92,12 +91,13 @@ public class Banque extends UnicastRemoteObject implements BanqueIntf {
 	public String toStringListeAgences(){
 		String s = "";
 		for(int i = 0; i < agences.size(); i++){
-				s += agences.get(i).toString();
-		}		
+			s += agences.get(i).toString();
+		}
 		return s;
 	}
 	
-	public String toString(){
+	@Override
+	public String toString() {
 		return "Nom de la banque : " + this.nomBanque
 			+ this.toStringListeAgences();
 	}
@@ -105,14 +105,6 @@ public class Banque extends UnicastRemoteObject implements BanqueIntf {
 	public void displayToString() {
 		System.out.println(this.toString());
 	}
-
-
-	public boolean insereAgence(String adrAgence, AgenceIntf agence)
-			throws RemoteException {
-		// TODO : insere adrAgence passe en parametre dans agence
-		return false;
-	}
-
 
 	/**
 	 * TODO : A revoir car je ne sais pas faire autrement. (Penser a l'enlever de BanqueIntf

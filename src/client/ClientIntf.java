@@ -15,5 +15,4 @@ public interface ClientIntf extends Serializable {
 	public ICompte rechercheCompte(int numCompte) throws RemoteException;
 	public boolean virement(int c1, int c2, double montant) throws RemoteException;
 	public List<ICompte> getListeComptesClient() throws RemoteException;
-
 }
