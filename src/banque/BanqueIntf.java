@@ -12,4 +12,5 @@ public interface BanqueIntf extends Remote {
 	public AgenceIntf rechercheAgence(String adrAgence) throws RemoteException;
 	public List<AgenceIntf> listeAgencestoString() throws RemoteException;
 	public void displayToString() throws RemoteException;
+	public String infos() throws RemoteException;
 }

@@ -46,7 +46,6 @@ public class Client {
 			// 6. On imprime tout à partir de l'objet Banque 
 			System.out.println(ca.toString());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

@@ -109,7 +109,18 @@ public class Banque extends UnicastRemoteObject implements BanqueIntf {
 
 	public boolean insereAgence(String adrAgence, AgenceIntf agence)
 			throws RemoteException {
-		// TODO Auto-generated method stub
+		// TODO : insere adrAgence passe en parametre dans agence
 		return false;
+	}
+
+
+	/**
+	 * TODO : A revoir car je ne sais pas faire autrement. (Penser a l'enlever de BanqueIntf
+	 * Permet de recupere les informations par le reseau.
+	 * Besoin de cet fonctions car toString ne marche pas avec RMI
+	 */
+	@Override
+	public String infos() throws RemoteException {
+		return this.toString();
 	}
 }

@@ -44,7 +44,6 @@ public class Main {
 			// 6. On imprime tout à partir de l'objet Banque 
 			bnp.displayToString();	
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
