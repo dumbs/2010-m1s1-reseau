@@ -1,10 +1,10 @@
 import java.rmi.Naming;
 
-import banque.BanqueIntf;
+import banque.IBanque;
 
 import util.Sexe;
 import agence.Agence;
-import client.ClientIntf;
+import client.IClient;
 
 
 public class Client {
@@ -14,7 +14,7 @@ public class Client {
 	 */
 	public static void main(String[] args) {
 		try {
-			BanqueIntf ca = (BanqueIntf) Naming.lookup("//localhost/CA");
+			IBanque ca = (IBanque) Naming.lookup("//localhost/CA");
 
 			// 3. On insère les agences dans l'objet Banque
 			ca.insereAgence("Montpellier", new Agence("Montpellier", ca));
@@ -35,12 +35,12 @@ public class Client {
 
 			
 			// 5. On crée des comptes et on fait quelques transactions
-			ClientIntf charron = agMtp.rechercheClient("John Charron");
+			IClient charron = agMtp.rechercheClient("John Charron");
 			int numCompteCharron = charron.creeCompte(500000.00);
 			int numLivretCharron = charron.creeLivret(100000, 2.5);
 			charron.virement(numCompteCharron, numLivretCharron, 50000);
 
-			ClientIntf brun = agMtp.rechercheClient("Bertrand Brun");
+			IClient brun = agMtp.rechercheClient("Bertrand Brun");
 			brun.creeCompte(483.06);
 
 			// 6. On imprime tout à partir de l'objet Banque 

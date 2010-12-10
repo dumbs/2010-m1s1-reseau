@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import agence.Agence;
-import agence.AgenceIntf;
+import agence.IAgence;
 
 //TODO: mettre a jour javadoc(return values, params, etc.)
 
@@ -19,16 +19,16 @@ import agence.AgenceIntf;
  * @author Bertrand BRUN et John CHARRON
  *
  */
-public class Banque extends UnicastRemoteObject implements BanqueIntf {
+public class Banque extends UnicastRemoteObject implements IBanque {
 	
 	private static final long serialVersionUID = 1L;
 	public String nomBanque;
-	public List<AgenceIntf> agences;
+	public List<IAgence> agences;
 
 	public Banque(String nomBanque) throws RemoteException{
 		super();
 		this.nomBanque = nomBanque;
-		agences = new ArrayList<AgenceIntf>();
+		agences = new ArrayList<IAgence>();
 	}
 
 	
@@ -39,7 +39,7 @@ public class Banque extends UnicastRemoteObject implements BanqueIntf {
 	 * @param adrAgence
 	 * @param agence
 	 */
-	public boolean insereAgence(String adrAgence, AgenceIntf agence) {
+	public boolean insereAgence(String adrAgence, IAgence agence) {
 		if(this.rechercheAgence(adrAgence) == null){
 			this.agences.add(agence);
 			return true;
@@ -64,7 +64,7 @@ public class Banque extends UnicastRemoteObject implements BanqueIntf {
 	 * @param adrAgence
 	 * @return
 	 */
-	public AgenceIntf rechercheAgence(String adrAgence){
+	public IAgence rechercheAgence(String adrAgence){
 		for(int i = 0; i < agences.size(); i++) {
 			if(((Agence) agences.get(i)).getAdrAgence().equals(adrAgence)) {
 				return agences.get(i);
@@ -80,7 +80,7 @@ public class Banque extends UnicastRemoteObject implements BanqueIntf {
 	 */
 	/* ?? JE NE COMPRENDS PAS, LA VILLE DE L'AGENCE EST DANS L'OBJET AGENCE 
 	 String adrAgence ?? */
-	public List<AgenceIntf> listeAgencestoString(){
+	public List<IAgence> listeAgencestoString(){
 		return this.agences;
 	}
 	

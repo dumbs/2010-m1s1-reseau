@@ -1,7 +1,7 @@
 import java.rmi.RemoteException;
 
 import util.Sexe;
-import client.ClientIntf;
+import client.IClient;
 import agence.Agence;
 import banque.Banque;
 
@@ -33,12 +33,12 @@ public class Main {
 					"Paris", "01.43.44.28.43", agParis);
 
 			// 5. On crée des comptes et on fait quelques transactions
-			ClientIntf charron = agMtp.rechercheClient("John Charron");
+			IClient charron = agMtp.rechercheClient("John Charron");
 			int numCompteCharron = charron.creeCompte(500000.00);
 			int numLivretCharron = charron.creeLivret(100000, 2.5);
 			charron.virement(numCompteCharron, numLivretCharron, 50000);
 
-			ClientIntf brun = agMtp.rechercheClient("Bertrand Brun");
+			IClient brun = agMtp.rechercheClient("Bertrand Brun");
 			brun.creeCompte(483.06);
 
 			// 6. On imprime tout à partir de l'objet Banque 

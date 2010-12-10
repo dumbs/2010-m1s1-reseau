@@ -7,7 +7,7 @@ import java.util.List;
 import compte.Compte;
 import compte.ICompte;
 
-public interface ClientIntf extends Serializable {
+public interface IClient extends Serializable {
 	
 	public int creeCompte(double solde) throws RemoteException;
 	public int creeLivret(double solde, double tauxInt) throws RemoteException;

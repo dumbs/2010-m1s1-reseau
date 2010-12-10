@@ -7,9 +7,9 @@ import java.util.List;
 import util.Adresse;
 import util.Sexe;
 import banque.Banque;
-import banque.BanqueIntf;
+import banque.IBanque;
 import client.Client;
-import client.ClientIntf;
+import client.IClient;
 
 /**
  * L'entité Agence contient trois attributs : le numéro d'agence, l'adresse de l'agence
@@ -18,14 +18,14 @@ import client.ClientIntf;
  * @author John CHARRON & Bertrand BRUN
  *
  */
-public class Agence implements AgenceIntf {
+public class Agence implements IAgence {
 	
 	private static final long serialVersionUID = 1L;
 	private static int nextNumAgence = 1;
 	private int numAgence;
 	private String adrAgence; // qui consiste exclusivement du nom de la ville = 1 agence par ville
-	private BanqueIntf banque;
-	private ArrayList<ClientIntf> clients; // attribut pas demandé
+	private IBanque banque;
+	private ArrayList<IClient> clients; // attribut pas demandé
 	
 	/** Constructeur vide. 
 	 * @throws RemoteException */
@@ -35,18 +35,18 @@ public class Agence implements AgenceIntf {
 		nextNumAgence++;
 		this.adrAgence = "";
 		this.banque = null;
-		this.clients = new ArrayList<ClientIntf>();
+		this.clients = new ArrayList<IClient>();
 	}
 	
 	/** Constructeur plein avec, en paramètre, un objet banque 
 	 * @throws RemoteException */
-	public Agence(String adrAgence, BanqueIntf banque) throws RemoteException {
+	public Agence(String adrAgence, IBanque banque) throws RemoteException {
 		super();
 		this.numAgence = nextNumAgence;
 		nextNumAgence++;
 		this.adrAgence = adrAgence;
 		this.banque = banque;
-		this.clients = new ArrayList<ClientIntf>();
+		this.clients = new ArrayList<IClient>();
 	}
 	
 	/**
@@ -57,7 +57,7 @@ public class Agence implements AgenceIntf {
 	 * @throws RemoteException 
 	 */
 	// ?? Et l'adresse du client ? Pourquoi l'adresse de la banque ??
-	public int creeClient(String nomClient, Sexe sexe, Adresse adrClient, AgenceIntf agence) throws RemoteException{
+	public int creeClient(String nomClient, Sexe sexe, Adresse adrClient, IAgence agence) throws RemoteException{
 		System.out.println("Agence.creeClient()");
 		Client client = new Client(nomClient, sexe, adrClient, this);
 		this.clients.add(client);
@@ -65,7 +65,7 @@ public class Agence implements AgenceIntf {
 	}
 	
 	public int creeClient(String nomClient, Sexe sexe, String rue, String ville,
-			String numTel, AgenceIntf agence) throws RemoteException{
+			String numTel, IAgence agence) throws RemoteException{
 		Client client = new Client(nomClient, sexe, rue, ville, numTel, this);
 		this.clients.add(client);
 		return client.getNumClient();
@@ -87,7 +87,7 @@ public class Agence implements AgenceIntf {
 	 * Permet de retrouver un client par son nom
 	 * @param nomClient
 	 */
-	public ClientIntf rechercheClient(String nomClient){
+	public IClient rechercheClient(String nomClient){
 		for(int i = 0; i < clients.size(); i++){
 			if(((Client) clients.get(i)).getNomClient() == nomClient){
 				return clients.get(i);
@@ -100,7 +100,7 @@ public class Agence implements AgenceIntf {
 	 * Retourne la liste des clients de l'agence, la taille de la liste n'était pas
 	 * connue à l'avance.
 	 */
-	public List<ClientIntf> listeClients(){
+	public List<IClient> listeClients(){
 		return this.clients;
 	}
 	
@@ -112,7 +112,7 @@ public class Agence implements AgenceIntf {
 		return this.adrAgence;
 	}
 	
-	public BanqueIntf getBanque(){
+	public IBanque getBanque(){
 		return this.banque;
 	}
 	
@@ -122,7 +122,7 @@ public class Agence implements AgenceIntf {
 	
 	public String toStringClients() {
 		String s = "";
-		for(ClientIntf c : clients){
+		for(IClient c : clients){
 			s += c.toString();
 		}
 		return s;

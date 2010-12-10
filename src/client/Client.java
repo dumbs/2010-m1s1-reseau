@@ -6,7 +6,7 @@ import java.util.List;
 import util.Adresse;
 import util.Sexe;
 import agence.Agence;
-import agence.AgenceIntf;
+import agence.IAgence;
 
 import compte.Compte;
 import compte.ICompte;
@@ -21,7 +21,7 @@ creeCompte(), creeLivret(), detruireCompte(), listeComptes(), virement()
  * @author user
  *
  */
-public class Client implements ClientIntf {
+public class Client implements IClient {
 
 	private static final long serialVersionUID = 1L;
 	private static int nextNumClient = 1;
@@ -29,10 +29,10 @@ public class Client implements ClientIntf {
 	private String nomClient;
 	private Sexe sexe;
 	private Adresse adrClient;
-	private AgenceIntf agence;
+	private IAgence agence;
 	private List<ICompte> comptesClient; // ?? attrbut supplémentaire... ici ??
 	
-	public Client(String nomClient, Sexe sexe, Adresse adrClient, AgenceIntf agence) throws RemoteException {
+	public Client(String nomClient, Sexe sexe, Adresse adrClient, IAgence agence) throws RemoteException {
 		super();
 		this.numClient = nextNumClient;
 		nextNumClient++;
@@ -44,7 +44,7 @@ public class Client implements ClientIntf {
 	}
 	
 	public Client(String nomClient, Sexe sexe, String rue, String ville, 
-			String numTel, AgenceIntf agence) throws RemoteException {
+			String numTel, IAgence agence) throws RemoteException {
 		super();
 		this.numClient = nextNumClient;
 		nextNumClient++;
@@ -153,7 +153,7 @@ public class Client implements ClientIntf {
 		return adrClient;
 	}
 
-	public AgenceIntf getAgence() {
+	public IAgence getAgence() {
 		return agence;
 	}
 
