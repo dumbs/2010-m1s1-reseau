@@ -14,7 +14,7 @@ public class Client {
 	 */
 	public static void main(String[] args) {
 		try {
-			BanqueIntf ca = (BanqueIntf) Naming.lookup("rmi://localhost/ca");
+			BanqueIntf ca = (BanqueIntf) Naming.lookup("//localhost/CA");
 			// 2. On crée des objets Agences
 			Agence agMtp = new Agence("Montpellier", ca);
 			Agence agParis = new Agence("Paris", ca);
@@ -44,7 +44,7 @@ public class Client {
 			brun.creeCompte(483.06);
 
 			// 6. On imprime tout à partir de l'objet Banque 
-			ca.displayToString();
+			System.out.println(ca.toString());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
