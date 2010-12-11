@@ -73,7 +73,7 @@ public class Client implements IClient {
 	 * @see client.ClientIntf#creeCompte(double)
 	 */
 	public int creeCompte(double solde) throws RemoteException {
-		Compte compte = new Compte(this.numClient, ((Agence) this.agence).getNumAgence(), solde);
+		Compte compte = new Compte(this.numClient, ((IAgence) this.agence).getNumAgence(), solde);
 		this.comptesClient.add(compte);
 		return compte.getNumCompte();
 	}
@@ -82,7 +82,7 @@ public class Client implements IClient {
 	 * @see client.ClientIntf#creeLivret(double, double)
 	 */
 	public int creeLivret(double solde, double tauxInt) throws RemoteException{
-		Livret livret = new Livret(this.numClient, ((Agence) this.agence).getNumAgence(), solde, tauxInt);
+		Livret livret = new Livret(this.numClient, ((IAgence) this.agence).getNumAgence(), solde, tauxInt);
 		this.comptesClient.add(livret);
 		return livret.getNumCompte();
 	}

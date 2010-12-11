@@ -1,6 +1,7 @@
 package agence;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import client.IClient;
  * @author John CHARRON & Bertrand BRUN
  *
  */
-public class Agence implements IAgence {
+public class Agence extends UnicastRemoteObject implements IAgence {
 	
 	private static final long serialVersionUID = 1L;
 	private static int nextNumAgence = 1;
@@ -27,7 +28,7 @@ public class Agence implements IAgence {
 	private IBanque banque;
 	private ArrayList<IClient> clients; // attribut pas demandé
 	
-	/** Constructeur vide. 
+	/** Constructeur par defaut. 
 	 * @throws RemoteException */
 	public Agence() throws RemoteException {
 		super();
@@ -89,7 +90,7 @@ public class Agence implements IAgence {
 	 */
 	public IClient rechercheClient(String nomClient){
 		for(int i = 0; i < clients.size(); i++){
-			if(((Client) clients.get(i)).getNomClient() == nomClient){
+			if (((Client) clients.get(i)).getNomClient().equals(nomClient)) {
 				return clients.get(i);
 			}
 		}
@@ -137,5 +138,9 @@ public class Agence implements IAgence {
 	
 	public void displayToString() throws RemoteException {
 		System.out.println(this.toString());
+	}
+	
+	public String infos() {
+		return (this.toString());
 	}
 }

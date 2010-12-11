@@ -66,8 +66,12 @@ public class Banque extends UnicastRemoteObject implements IBanque {
 	 */
 	public IAgence rechercheAgence(String adrAgence){
 		for(int i = 0; i < agences.size(); i++) {
-			if(((Agence) agences.get(i)).getAdrAgence().equals(adrAgence)) {
-				return agences.get(i);
+			try {
+				if(agences.get(i).getAdrAgence().equals(adrAgence)) {
+					return agences.get(i);
+				}
+			} catch (RemoteException e) {
+				e.printStackTrace();
 			}
 		}
 		return null;
@@ -90,8 +94,12 @@ public class Banque extends UnicastRemoteObject implements IBanque {
 	
 	public String toStringListeAgences(){
 		String s = "";
-		for(int i = 0; i < agences.size(); i++){
-			s += agences.get(i).toString();
+		try {
+			for(int i = 0; i < agences.size(); i++){
+				s += agences.get(i).infos();
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
 		}
 		return s;
 	}

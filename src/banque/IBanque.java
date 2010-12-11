@@ -13,4 +13,5 @@ public interface IBanque extends Remote {
 	public List<IAgence> listeAgencestoString() throws RemoteException;
 	public void displayToString() throws RemoteException;
 	public String infos() throws RemoteException;
+	public String getNomBanque() throws RemoteException;
 }

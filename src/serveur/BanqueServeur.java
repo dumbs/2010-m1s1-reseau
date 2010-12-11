@@ -4,6 +4,8 @@ import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
+import util.Clavier;
+
 import banque.Banque;
 
 
@@ -30,15 +32,17 @@ public class BanqueServeur {
             System.out.println("java RMI registry already exists.");
         }
         
-		try {
-			System.out.println("Contructing Credit Agricole Bank...");
-			Banque ca = new Banque("Credit Agricole");
-			System.out.println("Binding server implementations to registry...");
-			Naming.rebind("//localhost/CA", ca);
-			System.out.println("ComputeEngine bound in registry");
+        try {
+        		System.out.println("Contructing Credit Agricole Bank...");
+        		Banque ca = new Banque("Credit Agricole");
+        		System.out.println("Binding server implementations to registry...");
+        		Naming.rebind("//localhost/CA", ca);
+        		System.out.println("BanqueServeur bound in registry (//localhost/CA)");
+            	while (!(Clavier.lireString()).equals("quit"));
 		} catch (Exception e) {
 			System.out.println("RMI server exception:");
 			e.printStackTrace();
 		}
+		System.exit(0);
 	}
 }
